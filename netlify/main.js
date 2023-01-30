@@ -1,4 +1,7 @@
-document.querySelector('#giftmate-form').addEventListener('submit', function() {
+document.querySelector('#giftmate-form').addEventListener('submit', function(event) {
     event.preventDefault()
-    alert(this.elements.name.value)
+    const data = new FormData(event.target);
+    const value = Object.fromEntries(data.entries());
+
+    alert(JSON.stringify(value))
   });
