@@ -5,7 +5,17 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-serve(async (req) => {
+interface GiftMateFormData {
+  name: string
+  description: string
+  participants: string
+}
+
+function getParticipants(participants: string): string[] {
+  return [];
+}
+
+serve(async (req : Request) => {
 
   const { url, method } = req
 
@@ -19,6 +29,9 @@ serve(async (req) => {
       // This way your row-level-security (RLS) policies are applied.
       { global: { headers: { Authorization: req.headers.get('Authorization')! } } }
     )
+
+    const formData: GiftMateFormData = await req.json()
+    console.log("Form data:" + JSON.stringify(formData));
 
     const { data: lotteriesData, error: lotteriesError } = await supabaseClient.from('lotteries').select('*')
 
