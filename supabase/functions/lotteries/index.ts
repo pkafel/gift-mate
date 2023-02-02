@@ -31,18 +31,23 @@ serve(async (req : Request) => {
     )
 
     const formData: GiftMateFormData = await req.json()
-    console.log("Form data:" + JSON.stringify(formData));
+    console.log("Form data:" + JSON.stringify(formData))
 
-    const { data: lotteriesData, error: lotteriesError } = await supabaseClient.from('lotteries').select('*')
+    
+    const { data, error } = await supabaseClient.rpc('add_lottery_with_participants', 
+      {name_arg: formData.name, description_arg: formData.description, participants_arg: formData.participants})
 
-    if (lotteriesError) throw lotteriesError
+    if(error) {
+      throw error
+    }
 
-    console.log("From database raw: " + lotteriesData);
-    console.log("From database" + JSON.stringify(lotteriesData));
+    console.log("Response data:" + JSON.stringify(data))
 
     return new Response(
-      JSON.stringify(lotteriesData),
-      { headers: { "Content-Type": "application/json" } },
+      `{"lottery_id": ${data}}`, { 
+        headers: { "Content-Type": "application/json" },
+        status: 201,
+      },
     )
   } else {
     return new Response(

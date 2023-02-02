@@ -1,0 +1,31 @@
+create or replace function add_lottery_with_participants(name_arg text, description_arg text, participants_arg text)
+returns bigint
+language plpgsql
+as $$
+declare
+  new_row bigint;
+  participants_after_split text[] = string_to_array(participants_arg, ',');
+  participant text;
+  participant_ids bigint[];
+  number_of_participants int = array_length(participants_after_split, 1);
+  shift int = floor(random() * number_of_participants + 1)::int;
+begin
+  insert into lotteries(name, description)
+  values (name_arg, description_arg)
+  returning id into new_row;
+
+  foreach participant in array participants_after_split loop
+    insert into lottery_participants(name, lottery_id, nonce) 
+    values(btrim(participant), new_row, substr(md5(random()::text), 0, 8));
+  end loop;
+
+  select array_agg(id) into participant_ids from lottery_participants where lottery_id=new_row order by random();
+
+  for i in 1 .. array_upper(participant_ids, 1)
+  loop
+    update lottery_participants set gift_to_user_id=participant_ids[(i+shift) % number_of_participants] where id=participant_ids[i];
+  end loop;
+
+  return new_row;
+end;
+$$;
