@@ -1,6 +1,5 @@
 import { Handler } from '@netlify/functions'
 
-require('dotenv').config();
 const {
     DATABASE_URL,
     SUPABASE_SERVICE_API_KEY
