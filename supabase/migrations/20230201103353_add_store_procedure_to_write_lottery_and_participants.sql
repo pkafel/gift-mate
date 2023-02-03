@@ -23,7 +23,7 @@ begin
 
   for i in 1 .. array_upper(participant_ids, 1)
   loop
-    update lottery_participants set gift_to_user_id=participant_ids[(i+shift) % number_of_participants] where id=participant_ids[i];
+    update lottery_participants set gift_to_user_id=participant_ids[((i+shift) % number_of_participants)+1] where id=participant_ids[i];
   end loop;
 
   return new_row;
