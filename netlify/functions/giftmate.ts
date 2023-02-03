@@ -10,6 +10,13 @@ const supabase = createClient(DATABASE_URL, SUPABASE_SERVICE_API_KEY);
 export const handler: Handler = async (event, context) => {
   const { name = 'stranger' } = event.queryStringParameters
 
+  const { data, error } = await supabase.rpc('add_lottery_with_participants', 
+    {name_arg: 'Netlify works', description_arg: 'Netlify sexiness', participants_arg: 'A,B,C,Netlify'})
+
+  if(error) {
+    throw error
+  }
+
   return {
     statusCode: 200,
     body: JSON.stringify({
