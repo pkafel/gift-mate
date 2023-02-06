@@ -7,14 +7,23 @@ const {
 const { createClient } = require('@supabase/supabase-js');
 const supabase = createClient(DATABASE_URL, SUPABASE_SERVICE_API_KEY);
 
-export const handler: Handler = async (event, context) => {
+export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+  console.log({event}, {context})
   const { name = 'stranger' } = event.queryStringParameters
 
-  const { data, error } = await supabase.rpc('add_lottery_with_participants', 
-    {name_arg: 'Netlify works', description_arg: 'Netlify sexiness', participants_arg: 'A,B,C,Netlify'})
+  if(event.httpMethod == 'POST') {
+    const body = event.body;
+    const { data, error } = await supabase.rpc('add_lottery_with_participants', 
+      {name_arg: body.name, description_arg: body.description, participants_arg: body.participants});
 
-  if(error) {
-    throw error
+    if(error) {
+      throw error
+    }
+
+    return {
+      statusCode: 201,
+      body: '{}',
+    }
   }
 
   return {
