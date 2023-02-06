@@ -7,16 +7,21 @@ const {
 const { createClient } = require('@supabase/supabase-js');
 const supabase = createClient(DATABASE_URL, SUPABASE_SERVICE_API_KEY);
 
+interface GiftMateFormData {
+  name: string
+  description: string
+  participants: string
+}
+
 export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
   console.log({event}, {context})
   const { name = 'stranger' } = event.queryStringParameters
 
   if(event.httpMethod == 'POST') {
-    const body = event.body;
-    const payload = {name_arg: body.name, description_arg: body.description, participants_arg: body.participants}
-    console.log({payload});
+    const formData: GiftMateFormData = JSON.parse(event.body);
+
     const { data, error } = await supabase.rpc('add_lottery_with_participants', 
-      {name_arg: body.name, description_arg: body.description, participants_arg: body.participants});
+      {name_arg: formData.name, description_arg: formData.description, participants_arg: formData.participants});
 
     if(error) {
       console.log({error});
