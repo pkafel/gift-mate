@@ -8,7 +8,7 @@ declare
   participant text;
   participant_ids bigint[];
   number_of_participants int = array_length(participants_after_split, 1);
-  shift int = floor(random() * number_of_participants + 1)::int;
+  shift int = floor(random() * (number_of_participants - 1) + 1)::int;
 begin
   insert into lotteries(name, description)
   values (name_arg, description_arg)
