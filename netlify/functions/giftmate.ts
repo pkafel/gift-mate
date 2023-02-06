@@ -13,6 +13,8 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
 
   if(event.httpMethod == 'POST') {
     const body = event.body;
+    const payload = {name_arg: body.name, description_arg: body.description, participants_arg: body.participants}
+    console.log({payload});
     const { data, error } = await supabase.rpc('add_lottery_with_participants', 
       {name_arg: body.name, description_arg: body.description, participants_arg: body.participants});
 
