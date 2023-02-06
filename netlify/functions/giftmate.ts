@@ -17,13 +17,14 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       {name_arg: body.name, description_arg: body.description, participants_arg: body.participants});
 
     if(error) {
-      throw error
+      console.log({error});
+      throw error;
     }
 
     return {
       statusCode: 201,
       body: '{}',
-    }
+    };
   }
 
   return {
