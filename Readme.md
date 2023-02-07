@@ -18,7 +18,7 @@ The service is a good example of integration between Netlify and Supabase as it 
 * Serverless function called from the frontend can be found in `netlify/functions`
 * Database schema and functions are in `supabase/migrations`
 
-# Applying database changes
+# Working with database
 
 In order to use described commands you need to have installed Supabase CLI, authenticate and link it to the project.
 
@@ -27,7 +27,7 @@ In order to use described commands you need to have installed Supabase CLI, auth
 * `supabase db reset` reset all local migrations and applies them again
 * `supabase migration repair <id> --status reverted ` revert migration in remote database
 
-# Running and testing the serverless functions (backend)
+# Working with web hosting and serverless functions
 
 In order to use described commands you need to have installed Netlify CLI, authenticate and link it to the project.
 
