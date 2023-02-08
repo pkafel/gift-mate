@@ -15,7 +15,6 @@ interface GiftMateFormData {
 
 export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
   console.log({event}, {context})
-  const { name = 'stranger' } = event.queryStringParameters
 
   if(event.httpMethod == 'POST') {
     const formData: GiftMateFormData = JSON.parse(event.body);
@@ -28,16 +27,15 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       throw error;
     }
 
+    console.log({data});
     return {
       statusCode: 201,
-      body: '{}',
+      body: `{"id": "${data}"}`,
     };
-  }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: `Hello, ${name}!`,
-    }),
+  } else {
+    return {
+      statusCode: 405,
+      body: "{}",
+    }
   }
 }
