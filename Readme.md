@@ -20,7 +20,7 @@ The service is a good example of integration between [Netlify](https://www.netli
 
 # Working with database
 
-In order to use described commands you need to have installed [Supabase CLI](https://supabase.com/docs/reference/cli/start), authenticate and link it to the project.
+In order to use described commands you need to have installed [Supabase CLI](https://supabase.com/docs/reference/cli/start), authenticate and link it to the project. All the commands need to be executed from `supabase` directory.
 
 * `supabase migration list` shows all the local and remote migrations that have been applied
 * `supabase db push` applies migrations to remote dataase
@@ -29,6 +29,6 @@ In order to use described commands you need to have installed [Supabase CLI](htt
 
 # Working with web hosting and serverless functions
 
-In order to use described commands you need to have installed [Netlify CLI](https://docs.netlify.com/cli/get-started/), authenticate and link it to the project.
+In order to use described commands you need to have installed [Netlify CLI](https://docs.netlify.com/cli/get-started/), authenticate and link it to the project. All the commands need to be executed from `netlify` directory.
 
 * `netlify dev` ramp up netlify functions and web hosting locally
