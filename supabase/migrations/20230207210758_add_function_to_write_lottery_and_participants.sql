@@ -1,5 +1,5 @@
 create or replace function add_lottery_with_participants(name_arg text, description_arg text, participants_arg text)
-returns bigint
+returns uuid
 language plpgsql
 as $$
 declare
@@ -9,9 +9,10 @@ declare
   participant_ids bigint[];
   number_of_participants int = array_length(participants_after_split, 1);
   shift int = floor(random() * (number_of_participants - 1) + 1)::int;
+  shareable_lottery_uuid uuid = uuid_generate_v4();
 begin
-  insert into lotteries(name, description)
-  values (name_arg, description_arg)
+  insert into lotteries(name, description, lottery_uuid)
+  values (name_arg, description_arg, shareable_lottery_uuid)
   returning id into new_row;
 
   foreach participant in array participants_after_split loop
@@ -26,6 +27,6 @@ begin
     update lottery_participants set gift_to_user_id=participant_ids[((i+shift) % number_of_participants)+1] where id=participant_ids[i];
   end loop;
 
-  return new_row;
+  return shareable_lottery_uuid;
 end;
 $$;
