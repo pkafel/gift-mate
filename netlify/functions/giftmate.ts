@@ -27,7 +27,8 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       throw error;
     }
 
-    console.log({data});
+    console.log(`Created lottery: ${data}`);
+
     return {
       statusCode: 201,
       body: `{"id": "${data}"}`,

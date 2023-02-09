@@ -8,17 +8,23 @@ The service is a good example of integration between [Netlify](https://www.netli
 * Static site hosting and serverless functions from Netlify
 * Postgresql from Supabase
 
-# Architecture
+## High level architecture
 
 // TBD
 
-# Structure
+## Available urls
+
+* `/` main page with the form
+* `#lottery/<uuid>` summary of the lottery
+* `#user/<nonce>` reveal link that shows user who they should gift
+
+## Repository structure
 
 * HTML with CSS and background picture can be found in `netlify/web`
 * Serverless function called from the frontend can be found in `netlify/functions`
 * Database schema and functions are in `supabase/migrations`
 
-# Working with database
+## Working with database
 
 In order to use described commands you need to have installed [Supabase CLI](https://supabase.com/docs/reference/cli/start), authenticate and link it to the project. All the commands need to be executed from `supabase` directory.
 
@@ -27,7 +33,7 @@ In order to use described commands you need to have installed [Supabase CLI](htt
 * `supabase db reset` reset all local migrations and applies them again
 * `supabase migration repair <id> --status reverted ` revert migration in remote database
 
-# Working with web hosting and serverless functions
+## Working with web hosting and serverless functions
 
 In order to use described commands you need to have installed [Netlify CLI](https://docs.netlify.com/cli/get-started/), authenticate and link it to the project. All the commands need to be executed from `netlify` directory.
 
