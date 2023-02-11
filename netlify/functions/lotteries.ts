@@ -14,7 +14,7 @@ interface GiftMateFormData {
 }
 
 export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
-  console.log({event}, {context})
+  console.log({event});
 
   if(event.httpMethod == 'POST') {
     const formData: GiftMateFormData = JSON.parse(event.body);
