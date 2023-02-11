@@ -11,7 +11,7 @@ const supabase = createClient(DATABASE_URL, SUPABASE_SERVICE_API_KEY);
 export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
     console.log({event});
     return {
-        statusCode: 405,
-        body: "{}",
+        statusCode: 200,
+        body: `{"user_name":"Piotr", "gift_to":"Someone"}`,
       };
 }

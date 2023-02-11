@@ -7,6 +7,8 @@ const {
 const { createClient } = require('@supabase/supabase-js');
 const supabase = createClient(DATABASE_URL, SUPABASE_SERVICE_API_KEY);
 
+const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
+
 interface GiftMateFormData {
   name: string
   description: string
@@ -33,6 +35,20 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       statusCode: 201,
       body: `{"id": "${data}"}`,
     };
+  } else if(event.httpMethod == 'GET') {
+    const urlParts = event.rawUrl.split("/");
+    if(uuidRegex.test(urlParts.slice(-1))) {
+      console.log(`Get lottery: ${urlParts.slice(-1)}`);
+      return {
+        statusCode: 200,
+        body: `{"participants:[]"}`,
+      }
+    } else {
+      return {
+        statusCode: 400,
+        body: `{"participants:[]"}`,
+      }
+    }
   } else {
     return {
       statusCode: 405,
