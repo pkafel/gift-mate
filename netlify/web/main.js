@@ -1,6 +1,6 @@
 // Functions 
 
-const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
+const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
 const lotteryPath = /^#lotteries\/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
 const userPath = /^#users\/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
 
@@ -46,10 +46,32 @@ function showLoteryPage() {
   const uuid = window.location.href.split("/").slice(-1);
 
   fetch(`/.netlify/functions/lotteries/${uuid}`, { method: 'GET'})
-    .then((response) => response.json())
+    .then((response) => {
+      return response.json();
+    })
     .then((data) => {
-      alert(JSON.stringify(data));
-    });
+      console.log('Im here!');
+      console.log({data});
+
+      var tbodyRef = document.getElementsByTagName('tbody')[0];
+      data.participants.forEach(participant => {
+        console.log({participant});
+        const newRow = tbodyRef.insertRow();
+
+        const nameCell = newRow.insertCell();
+        var newText = document.createTextNode(participant.name);
+        nameCell.appendChild(newText);
+
+        const linkCell = newRow.insertCell();
+        var newText = document.createTextNode(participant.nonce);
+        linkCell.appendChild(newText);
+
+        const viewedCell = newRow.insertCell();
+        var newText = document.createTextNode(participant.viewed);
+        viewedCell.appendChild(newText);
+      });
+    })
+    .catch((error) => alert(`We have an error ${error}`));
 }
 
 function showUserPage() {
