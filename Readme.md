@@ -6,11 +6,38 @@ The service is hosted here.
 
 The service is a good example of integration between [Netlify](https://www.netlify.com/) and [Supabase](https://supabase.com/) as it is using:
 * Static site hosting and serverless functions from Netlify
-* Postgresql from Supabase
+* PostgreSQL from Supabase
 
 ## High level architecture
 
-// TBD
+```mermaid
+flowchart LR
+    subgraph Netlify
+      direction TB
+      lottery_function[Lottery function]
+      user_function[User function]
+      web_page[Web page with resources]
+    end
+    subgraph Supabase
+    direction LR
+      postgrest[PostgREST]
+      subgraph PostgreSQL
+        direction TB
+        lotteries[lotteries table]
+        lottery_participants[lottery_participants table]
+        add_lottery_with_participants[add_lottery_with_participants function]
+        add_lottery_with_participants-->|writes to|lotteries
+        add_lottery_with_participants-->|writes to|lottery_participants
+      end
+      postgrest --> PostgreSQL
+    end
+    browser{Browser}
+    browser --> lottery_function
+    browser --> user_function
+    browser --> web_page
+    lottery_function --> postgrest
+    user_function --> postgrest
+```
 
 ## Available urls
 
