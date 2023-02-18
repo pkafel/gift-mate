@@ -7,11 +7,33 @@ const {
 const { createClient } = require('@supabase/supabase-js');
 const supabase = createClient(DATABASE_URL, SUPABASE_SERVICE_API_KEY);
 
+const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
 
 export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
     console.log({event});
-    return {
-        statusCode: 200,
-        body: `{"user_name":"Piotr", "gift_to":"Someone"}`,
-      };
+
+    if(event.httpMethod == 'GET') {
+        const urlParts = event.rawUrl.split("/");
+        const nonce = urlParts[urlParts.length - 1];
+
+        const { data, error } = await supabase.from('lottery_participants')
+            .select('name') // need to join with itself and pull a correct name
+            .eq('nonce', nonce);
+
+        if(error) {
+            console.log({error});
+            throw error;
+        }
+
+        console.log(data[0]);
+        return {
+            statusCode: 200,
+            body: `{"name": "${data[0].name}"}`,
+            };
+    } else {
+        return {
+            statusCode: 405,
+            body: '{}',
+          };
+    }
 }
