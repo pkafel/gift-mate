@@ -17,7 +17,7 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
         const nonce = urlParts[urlParts.length - 1];
 
         const { data, error } = await supabase.from('lottery_participants')
-            .select('name') // need to join with itself and pull a correct name
+            .select('name, lottery_participants(name)')
             .eq('nonce', nonce);
 
         if(error) {
@@ -25,10 +25,10 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
             throw error;
         }
 
-        console.log(data[0]);
+        console.log(JSON.stringify(data));
         return {
             statusCode: 200,
-            body: `{"name": "${data[0].name}"}`,
+            body: `{"name": "${data[0].lottery_participants[0].name}"}`,
             };
     } else {
         return {

@@ -2,7 +2,7 @@
 
 const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
 const lotteryPath = /^#lotteries\/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
-const userPath = /^#users\/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
+const userPath = /^#users\/[0-9a-zA-Z]*\b$/i;
 
 async function onFormSubmit(event) {
   event.preventDefault();
@@ -26,9 +26,10 @@ async function onFormSubmit(event) {
 }
 
 function setStateofPageOnLoad(event) {
-  if (lotteryPath.test(window.location.href)) {
+  const subdirectory = window.location.href.substring(window.location.href.indexOf("#"));
+  if (lotteryPath.test(subdirectory)) {
     showLoteryPage();
-  } else if(userPath.test(window.location.href)) {
+  } else if(userPath.test(subdirectory)) {
     showUserPage();
   } else {
     showFormPage();
@@ -75,7 +76,17 @@ function showLoteryPage() {
 }
 
 function showUserPage() {
-  // TBD
+  $('#giftmate-summary-table-div').hide();
+  $('#giftmate-form-div').hide();
+
+  const nonce = window.location.href.split("/").slice(-1);
+  fetch(`/.netlify/functions/users/${nonce}`, { method: 'GET'})
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      alert(JSON.stringify(data));
+    });
 }
 
 // Events - handler binding
