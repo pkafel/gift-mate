@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="pl">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <title>Minimal Main</title>
+  <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="Minimal-Main.css" media="screen">
+  <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="main.js" defer=""></script>
+  <meta name="generator" content="Nicepage 5.3.6, nicepage.com">
+  <meta name="referrer" content="origin">
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <meta name="theme-color" content="#478ac9">
+  <meta property="og:title" content="Minimal Main">
+  <meta property="og:type" content="website">
+</head>
+
+<body class="u-body u-xl-mode" data-lang="pl">
+  <header class="u-clearfix u-header u-header" id="sec-8778">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <p class="u-text u-text-default u-text-1">
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-active-black u-text-black u-text-hover-palette-1-base u-btn-1"
+          href="Minimal-Main.html">GiftMate</a>
+      </p>
+      <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+        <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700;">
+          <a class="u-button-style u-custom-border u-custom-border-color u-custom-borders u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-text-shadow u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+            href="#">
+            <svg class="u-svg-link" viewBox="0 0 24 24">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use>
+            </svg>
+            <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px"
+              xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <rect y="1" width="16" height="2"></rect>
+                <rect y="7" width="16" height="2"></rect>
+                <rect y="13" width="16" height="2"></rect>
+              </g>
+            </svg>
+          </a>
+        </div>
+        <div class="u-custom-menu u-nav-container">
+          <ul class="u-nav u-spacing-20 u-unstyled u-nav-1">
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-black u-text-grey-90 u-text-hover-palette-1-base"
+                style="padding: 10px;"
+                href="Minimal-About.html">About</a>
+            </li>
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-black u-text-grey-90 u-text-hover-palette-1-base"
+                href="https://github.com/pkafel/gift-mate" target="_blank" style="padding: 10px;">Github</a>
+            </li>
+          </ul>
+        </div>
+        <div class="u-custom-menu u-nav-container-collapse">
+          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+            <div class="u-inner-container-layout u-sidenav-overflow">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Minimal-About.html">About</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://github.com/pkafel/gift-mate"
+                    target="_blank">Github</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <section class="u-clearfix u-image u-section-1" id="sec-e27f" data-image-width="904" data-image-height="1280">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <p class="u-align-center u-text u-text-1"> Make your holiday gift-giving easy and fun with our lottery tool!
+        Simply input your participant's names and let our tool randomly assign gift recipients for you.</p>
+      <div class="u-align-center u-form u-form-1">
+        <form id="giftmate-form" action="/.netlify/functions/lotteries"
+          class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email"
+          name="giftmate-form">
+          <div class="u-form-group u-form-name u-label-none">
+            <label for="name-6797" class="u-label">Name</label>
+            <input type="text" placeholder="Name of the lottery" id="name-6797" name="name"
+              class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required=""
+              autofocus="autofocus">
+          </div>
+          <div class="u-form-group u-form-message u-label-none">
+            <label for="email-6797" class="u-label">Email</label>
+            <textarea placeholder="Description of the lottery" id="email-6797" name="description"
+              class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-2" required="required"
+              rows="4"></textarea>
+          </div>
+          <div class="u-form-group u-form-message u-label-none">
+            <label for="message-6797" class="u-label">Address</label>
+            <textarea placeholder="Comma separated list of participants" rows="4" cols="50" id="message-6797"
+              name="participants" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-3"
+              required=""></textarea>
+          </div>
+          <div class="u-align-center u-form-group u-form-submit">
+            <a href="#" class="u-btn u-btn-submit u-button-style">Submit</a>
+            <input type="submit" value="submit" class="u-form-control-hidden">
+          </div>
+          <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+          <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try
+            again.</div>
+          <input type="hidden" value="" name="recaptchaResponse">
+          <input type="hidden" name="formServices" value="057726ed3dc75ed6f7af325060b2193c">
+        </form>
+      </div>
+    </div>
+  </section>
+  <footer class="u-align-center u-clearfix u-footer u-footer" id="sec-a024">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <p class="u-small-text u-text u-text-variant u-text-1">Made by <a href="https://twitter.com/PiotrKafel"
+          class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"
+          target="_blank">@PiotrKafel</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
