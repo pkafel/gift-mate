@@ -4,13 +4,17 @@ function showUserPage() {
 
     fetch(`/.netlify/functions/users/${nonce}`, { method: 'GET' })
         .then((response) => {
-            return response.json();
+            if(response.status == 410) {
+                alert('Url already used!');
+            } else {
+                data = response.json();
+                document.getElementById('gifter').textContent = data.gifter_name;
+                document.getElementById('giftee').textContent = data.giftee_name;
+            }
         })
-        .then((data) => {
-            document.getElementById('gifter').textContent = data.gifter_name;
-            document.getElementById('giftee').textContent = data.giftee_name;
-        })
-        .catch((error) => alert(`We have an error ${error}`));
+        .catch((error) => {
+            alert(`We have an error ${error}`)
+        });
 }
 
 document.addEventListener("DOMContentLoaded", showUserPage);
