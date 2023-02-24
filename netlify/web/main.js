@@ -78,8 +78,10 @@ function showUserPage() {
       return response.json();
     })
     .then((data) => {
-      // alert(JSON.stringify(data));
-    });
+      document.getElementById('gifter').textContent = data.gifter_name;
+      document.getElementById('giftee').textContent = data.giftee_name;
+    })
+    .catch((error) => alert(`We have an error ${error}`));
 }
 
 // Events - handler binding

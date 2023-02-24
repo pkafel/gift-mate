@@ -28,7 +28,8 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
         console.log(JSON.stringify(data));
         return {
             statusCode: 200,
-            body: `{"name": "${data[0].lottery_participants[0].name}"}`,
+            body: `{"gifter_name": "${data[0].name}", 
+                    "giftee_name": "${data[0].lottery_participants[0].name}"}`
             };
     } else {
         return {
