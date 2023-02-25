@@ -5,8 +5,9 @@ function showUserPage() {
     fetch(`/.netlify/functions/users/${nonce}`, { method: 'GET' })
         .then((response) => {
             if(response.status == 410) {
-                alert('Url already used!');
+                document.getElementById('url-not-used-message').style.display = 'none';
             } else {
+                document.getElementById('url-used-message').style.display = 'none';
                 data = response.json();
                 document.getElementById('gifter').textContent = data.gifter_name;
                 document.getElementById('giftee').textContent = data.giftee_name;
