@@ -4,7 +4,6 @@ function showUserPage() {
 
     fetch(`/.netlify/functions/users/${nonce}`, { method: 'GET' })
         .then((response) => {
-            alert('Start debug');
             if(response.status == 410) {
                 document.getElementById('url-used-message').style.display = 'block';
             } else {
@@ -15,9 +14,7 @@ function showUserPage() {
                 });
             }
         })
-        .catch((error) => {
-            alert(`We have an error ${error}`)
-        });
+        .catch((error) => alert(`We have an error ${error}`));
 }
 
 document.addEventListener("DOMContentLoaded", showUserPage);
