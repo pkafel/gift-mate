@@ -2,7 +2,7 @@
 
 GiftMate is a service that allows user to match people for Christmas gift lottery. User need to input participant of the lottery and GiftMate will assign them to each other. For every participant GiftMate will generate unique and one time use only link which will reveal who user will gift.
 
-The service is hosted here.
+The service is hosted [here](https://gitftmate.netlify.app/).
 
 The service is a good example of integration between [Netlify](https://www.netlify.com/) and [Supabase](https://supabase.com/) as it is using:
 * Static site hosting and serverless functions from Netlify
@@ -39,11 +39,11 @@ flowchart LR
     user_function --> postgrest
 ```
 
-## Available urls
+## Available API resources
 
-* `/` main page with the form
-* `#lottery/<uuid>` summary of the lottery
-* `#user/<nonce>` reveal link that shows user who they should gift
+* `POST /.netlify/functions/giftmate` - Create a new lottery. The accepted body is JSON with the [following structure](https://github.com/pkafel/gift-mate/blob/main/netlify/functions/lotteries.ts#L12). Returns lottery uuid.
+* `GET /.netlify/functions/lotteries/${uuid}` - Returns info about a lottery.
+* `GET /.netlify/functions/users/${nonce}` - Returns info about who the user should gift.
 
 ## Repository structure
 
