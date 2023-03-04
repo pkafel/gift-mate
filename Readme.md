@@ -47,7 +47,7 @@ flowchart LR
 
 | Method      | Url         | Description    | Return      |
 | ----------- | ----------- | -------------- | ----------- |
-| `POST`  | `/.netlify/functions/giftmate`          | Creates a new lottery. Body description is here. | Lottery unique identifier |
+| `POST`  | `/.netlify/functions/giftmate`          | Creates a new lottery. Body description is [here](https://github.com/pkafel/gift-mate/blob/main/netlify/functions/lotteries.ts#L12). | Lottery unique identifier |
 | `GET`   | `/.netlify/functions/lotteries/${uuid}` | Retrieves info about the lottery | Participants together with unique urls and info if they have been used |
 | `GET`   | `/.netlify/functions/users/${nonce}`    | Retrieves info about the assignment for the user. One time only! | Gifter's and giftee's names |
 
