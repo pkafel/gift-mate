@@ -4,13 +4,15 @@ function showUserPage() {
 
     fetch(`/.netlify/functions/users/${nonce}`, { method: 'GET' })
         .then((response) => {
+            alert('Start debug');
             if(response.status == 410) {
-                document.getElementById('url-not-used-message').style.display = 'none';
+                document.getElementById('url-used-message').style.display = 'block';
             } else {
-                document.getElementById('url-used-message').style.display = 'none';
-                data = response.json();
-                document.getElementById('gifter').textContent = data.gifter_name;
-                document.getElementById('giftee').textContent = data.giftee_name;
+                response.json().then((data) => {
+                    document.getElementById('url-not-used-message').style.display = 'block';
+                    document.getElementById('gifter').textContent = data.gifter_name;
+                    document.getElementById('giftee').textContent = data.giftee_name;
+                });
             }
         })
         .catch((error) => {
