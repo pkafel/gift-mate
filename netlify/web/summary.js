@@ -17,7 +17,7 @@ function showLoteryPage() {
                 nameCell.appendChild(newText);
 
                 const linkCell = newRow.insertCell();
-                var newText = document.createTextNode(`${window.location.origin}/Minimal-User.html?id=${participant.nonce}`);
+                var newText = document.createTextNode(`${window.location.origin}/minimal-user?id=${participant.nonce}`);
                 linkCell.appendChild(newText);
 
                 const viewedCell = newRow.insertCell();
