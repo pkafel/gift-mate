@@ -1,5 +1,4 @@
 function onFormSubmit(event) {
-  e.preventDefault();
   const form = event.currentTarget;
 
   const data = new FormData(form);
@@ -13,20 +12,6 @@ function onFormSubmit(event) {
       window.location.replace(`/Minimal-Summary.html?id=${data.id}`);
     })
     .catch((error) => alert(`We have an error ${error}`));
-}
-
-function validInput(inputs) {
-  const name = inputs.name;
-  const participants = inputs.participants;
-
-  if (!name || name.trim() === "") {
-    const inp = document.getElementById('name-6797');
-    inp.setCustomValidity("Name of the lottery cannot be empty!");
-    inp.reportValidity();
-    return false;
-  }
-
-  return true;
 }
 
 // Form validation
@@ -46,12 +31,12 @@ let defaultConfig = {
 var form = document.getElementById('giftmate-form');
 var pristine = new Pristine(form, defaultConfig, false);
 
-pristine.addValidator(document.getElementById('message-6797'), function (value) {
+pristine.addValidator(document.getElementById('participants'), function (value) {
   const participantsArray = value.split(',');
   return participantsArray.length > 1;
 }, "Lottery needs more than one participant", 2, false);
 
-pristine.addValidator(document.getElementById('message-6797'), function (value) {
+pristine.addValidator(document.getElementById('participants'), function (value) {
   const participantsArray = value.split(',');
   const participantsSet = new Set(participantsArray);
   return participantsArray.length === participantsSet.size;
