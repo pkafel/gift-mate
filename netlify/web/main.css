@@ -80,3 +80,7 @@
     width: 340px;
   }
 }
+
+.form-group .text-help {
+  color: #dc1d34;
+}
